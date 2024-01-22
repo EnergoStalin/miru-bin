@@ -2,7 +2,7 @@
 
 export RELEASES="$(mktemp /tmp/miru-bin-update.XXX)"
 
-if [[ -z "$GITHUB_TOKEN" ]]; then
+if ! [[ -z "$GITHUB_TOKEN" ]]; then
 	export AUTH="-H \"Authorization: Bearer $GITHUB_TOKEN\""
 fi
 
