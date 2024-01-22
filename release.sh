@@ -79,6 +79,12 @@ pkgbase = miru-bin
 pkgname = miru-bin
 EOF
 
-git add PKGBUILD .SRCINFO
+git add .
 git commit -m "chore(release): v$PKGVER"
-git push --all
+
+# Push github
+git push origin master
+
+# Push aur
+git remote add aur $ORIGIN
+git push aur master
