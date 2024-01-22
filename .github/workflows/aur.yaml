@@ -27,17 +27,14 @@ jobs:
           git config --local user.name ${{ secrets.AUR_USERNAME }}
           git config --local user.email ${{ secrets.AUR_EMAIL }}
       - name: Update files
-        run: |
-          ./release.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./release.sh
 
       - name: Publish github
         run: git push origin master
 
       - name: Publish aur
         run: |
-          git remote add aur $ORIGIN
+          git remote add aur ssh://aur@aur.archlinux.org/miru-bin.git
           git push aur master
-        env:
-          ORIGIN: ssh://aur@aur.archlinux.org/miru-bin.git
