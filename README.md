@@ -9,6 +9,6 @@ curl \
 ```
 
 # Required action secrets
-- AUR_SSH_PRIVATE_KEY
+- AUR_SSH_PRIVATE_KEY (ed25519)
 - AUR_USERNAME
 - AUR_EMAIL
