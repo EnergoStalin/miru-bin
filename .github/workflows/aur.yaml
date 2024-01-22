@@ -9,7 +9,7 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Setup aur repo
+      - name: Setup aur
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.AUR_SSH_PRIVATE_KEY }}" > ~/.ssh/aur
@@ -26,9 +26,18 @@ jobs:
 
           git config --local user.name ${{ secrets.AUR_USERNAME }}
           git config --local user.email ${{ secrets.AUR_EMAIL }}
-      - name: Update and push release to aur & github
+      - name: Update files
         run: |
           ./release.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish github
+        run: git push origin master
+
+      - name: Publish aur
+        run: |
+          git remote add aur $ORIGIN
+          git push aur master
+        env:
           ORIGIN: ssh://aur@aur.archlinux.org/miru-bin.git
